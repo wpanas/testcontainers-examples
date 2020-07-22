@@ -5,10 +5,10 @@ that use [TestContainers](https://www.testcontainers.org/)
 with different technologies. 
 I hope it will help you use it in your own projects.
 
-All samples are build with Gradle.
+All samples are build with Kotlin & Gradle.
 
 # Sample projects
 
 ## Junit 5
 
-- [Spring MVC & JPA based on PostgreSQL](./spring-junit5)
+- [Spring MVC & JPA based on PostgreSQL](./spring-junit5/README.md)
