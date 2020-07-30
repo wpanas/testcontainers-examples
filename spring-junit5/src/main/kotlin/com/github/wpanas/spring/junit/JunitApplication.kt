@@ -1,6 +1,5 @@
 package com.github.wpanas.spring.junit
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.data.domain.Page
