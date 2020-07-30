@@ -1,7 +1,7 @@
 # Testcontainers Examples
 
 This repository contains sample projects
-that use [TestContainers](https://www.testcontainers.org/)
+that use [Testcontainers](https://www.testcontainers.org/)
 with different technologies. 
 I hope it will help you use it in your own projects.
 
@@ -11,4 +11,5 @@ All samples are build with Kotlin & Gradle.
 
 ## Junit 5
 
-- [Spring MVC & JPA based on PostgreSQL](./spring-junit5/README.md)
+- [Simplest Spring MVC & JPA based on PostgreSQL](./spring-junit5/README.md)
+- [Spring MVC & JPA with local development set up](./local-db/README.md)
