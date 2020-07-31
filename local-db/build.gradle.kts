@@ -17,7 +17,6 @@ dependencies {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
 
-//	testImplementation("org.testcontainers:junit-jupiter")
 	implementation("org.testcontainers:postgresql")
 }
 
