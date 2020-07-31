@@ -35,7 +35,7 @@ class PostgreSQLInitializer : ApplicationContextInitializer<ConfigurableApplicat
 }
 ```
 
-[Full code](./src/main/kotlin/com/github/wpanas/spring/junit/LocalApplication.kt)
+[Full code](./src/main/kotlin/com/github/wpanas/spring/local/LocalApplication.kt)
 
 ## Test code
 
@@ -48,7 +48,7 @@ internal class CatControllerTest {
 }
 ```
 
-[Full code](./src/test/kotlin/com/github/wpanas/spring/junit/CatControllerTest.kt)
+[Full code](./src/test/kotlin/com/github/wpanas/spring/local/CatControllerTest.kt)
 
 ## Gradle dependencies
 
