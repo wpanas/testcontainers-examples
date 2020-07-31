@@ -20,9 +20,9 @@ class PostgreSQLInitializer : ApplicationContextInitializer<ConfigurableApplicat
 		postgreSQLContainer.start()
 
 		val properties = mapOf(
-				Pair("spring.datasource.url", postgreSQLContainer.jdbcUrl),
-				Pair("spring.datasource.username", postgreSQLContainer.username),
-				Pair("spring.datasource.password", postgreSQLContainer.password)
+			"spring.datasource.url" to postgreSQLContainer.jdbcUrl,
+			"spring.datasource.username" to postgreSQLContainer.username,
+			"spring.datasource.password" to postgreSQLContainer.password
 		)
 
 		applicationContext.environment.apply {
