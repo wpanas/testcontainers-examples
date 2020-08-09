@@ -1,0 +1,15 @@
+server.port: 8181
+
+spring:
+  kafka:
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        auto.offset.reset: "earliest"
+
+order-processor:
+  group-id: "com.github.wpanas.order.processor"
+  enabled: true
