@@ -13,3 +13,4 @@ All samples are build with Kotlin & Gradle.
 
 - [Simplest Spring MVC & JPA based on PostgreSQL](./spring-junit5/README.md)
 - [Spring MVC & JPA with local development set up](./local-db/README.md)
+- [Spring Kafka](./kafka/README.md)
