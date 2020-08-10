@@ -7,10 +7,8 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.context.DynamicPropertyRegistry
-import org.springframework.test.context.DynamicPropertySource
 
-@SpringBootTest
+@SpringBootTest(properties = ["order-processor.enabled=false"])
 @ContextConfiguration(initializers = [KafkaInitializer::class])
 internal class OrderProcessorTest {
 
@@ -31,15 +29,5 @@ internal class OrderProcessorTest {
 
 		assertNotNull(order)
 		assertTrue(order?.isDone!!)
-	}
-
-	companion object {
-		@JvmStatic
-		@DynamicPropertySource
-		fun register(registry: DynamicPropertyRegistry) {
-			registry.add("order-processor.enabled") {
-				false
-			}
-		}
 	}
 }
