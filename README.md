@@ -10,7 +10,7 @@ All samples are build with [Kotlin](https://kotlinlang.org/), [Gradle](https://g
 Continuous integration is running at [CicleCI](https://circleci.com/).
 
 Current tests status is:
-![wpanas](https://circleci.com/gh/wpanas/testcontainers-examples.svg?style=svg)
+[![wpanas](https://circleci.com/gh/wpanas/testcontainers-examples.svg?style=svg)](https://circleci.com/gh/wpanas/testcontainers-examples)
 
 # Sample projects
 
