@@ -16,16 +16,16 @@ internal class OrderProcessorTest {
 	lateinit var underTest: OrderProcessor
 
 	@Autowired
-	lateinit var orderRepository: OrderRepository
+	lateinit var orderService: OrderService
 
 	@Test
 	internal fun `should process orders`() {
 		val details = OrderDetails("Latte")
-		val orderId = orderRepository.placeOrder(details).id
+		val orderId = orderService.placeOrder(details).id
 
 		underTest.onMessage(ConsumerRecord(topic, 0, 0, orderId.toString(), details))
 
-		val order = orderRepository.findOne(orderId)
+		val order = orderService.findOne(orderId)
 
 		assertNotNull(order)
 		assertTrue(order?.isDone!!)

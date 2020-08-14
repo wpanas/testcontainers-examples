@@ -25,28 +25,28 @@ fun main(args: Array<String>) {
 
 @RestController
 @RequestMapping("/order")
-class OrderController(private val orderRepository: OrderRepository) {
+class OrderController(private val orderService: OrderService) {
 
 	@PostMapping
 	fun placeOrder(@RequestBody orderDto: CreateOrderDto): ShowOrderDto = OrderDetails(orderDto.coffee)
-			.let { orderDetails -> orderRepository.placeOrder(orderDetails) }
+			.let { orderDetails -> orderService.placeOrder(orderDetails) }
 			.let(Order::toDto)
 
 	@GetMapping("/{id}")
-	fun checkOrder(@PathVariable("id") id: UUID): ResponseEntity<ShowOrderDto> = orderRepository.findOne(id)
+	fun checkOrder(@PathVariable("id") id: UUID): ResponseEntity<ShowOrderDto> = orderService.findOne(id)
 			?.let(Order::toDto)
 			.let { Optional.ofNullable(it) }
 			.let { ResponseEntity.of(it) }
 
 	@GetMapping
-	fun listOrders(): List<ShowOrderDto> = orderRepository.findAll()
+	fun listOrders(): List<ShowOrderDto> = orderService.findAll()
 			.map(Order::toDto)
 }
 
 fun Order.toDto() = ShowOrderDto(id, coffee, isDone)
 
 @Service
-class OrderRepository(private val scheduler: OrderProcessingScheduler) {
+class OrderService(private val scheduler: OrderProcessingScheduler) {
 	private val orders: ConcurrentMap<UUID, Order> = ConcurrentHashMap()
 
 	fun placeOrder(orderDetails: OrderDetails): Order {
@@ -63,18 +63,19 @@ class OrderRepository(private val scheduler: OrderProcessingScheduler) {
 	fun findOne(orderId: UUID): Order? = orders[orderId]
 
 	fun findAll(): Set<Order> = orders.values.toSet()
+
 	fun deleteAll() {
 		orders.clear()
 	}
 }
 
 @Component
-class OrderProcessor(private val orderRepository: OrderRepository) : MessageListener<String, OrderDetails> {
+class OrderProcessor(private val orderService: OrderService) : MessageListener<String, OrderDetails> {
 	@KafkaListener(topics = [topic], groupId = "\${order-processor.group-id}", autoStartup = "\${order-processor.enabled:false}")
 	override fun onMessage(data: ConsumerRecord<String, OrderDetails>?) {
 		data?.let { record ->
 			logger.info("Processing order: ${record.value()} with id: ${record.key()}")
-			orderRepository.finishOrder(UUID.fromString(record.key()))
+			orderService.finishOrder(UUID.fromString(record.key()))
 		}
 	}
 

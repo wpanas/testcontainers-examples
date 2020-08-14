@@ -29,14 +29,14 @@ internal class OrderControllerTest {
 	lateinit var mockMvc: MockMvc
 
 	@Autowired
-	lateinit var orderRepository: OrderRepository
+	lateinit var orderService: OrderService
 
 	@Autowired
 	lateinit var objectMapper: ObjectMapper
 
 	@BeforeEach
 	internal fun setUp() {
-		orderRepository.deleteAll()
+		orderService.deleteAll()
 	}
 
 	@Test
@@ -56,14 +56,14 @@ internal class OrderControllerTest {
 				.toOrder()
 
 
-		await untilCallTo { orderRepository.findOne(order.id) } has {
+		await untilCallTo { orderService.findOne(order.id) } has {
 			isDone
 		}
 	}
 
 	@Test
 	internal fun `should check order details`() {
-		val order = orderRepository.placeOrder(OrderDetails("Latte"))
+		val order = orderService.placeOrder(OrderDetails("Latte"))
 
 		mockMvc.get("/order/${order.id}") {
 			contentType = MediaType.APPLICATION_JSON
@@ -80,8 +80,8 @@ internal class OrderControllerTest {
 
 	@Test
 	internal fun `should list orders`() {
-		val firstOrder = orderRepository.placeOrder(OrderDetails("Latte")).toDto()
-		val secondOrder = orderRepository.placeOrder(OrderDetails("Espresso")).toDto()
+		val firstOrder = orderService.placeOrder(OrderDetails("Latte")).toDto()
+		val secondOrder = orderService.placeOrder(OrderDetails("Espresso")).toDto()
 
 		mockMvc.get("/order") {
 			contentType = MediaType.APPLICATION_JSON
