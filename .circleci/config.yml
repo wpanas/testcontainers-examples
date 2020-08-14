@@ -5,7 +5,7 @@
 version: 2
 jobs:
   build:
-    machine: true
+    machine: true # https://www.testcontainers.org/supported_docker_environment/continuous_integration/circle_ci/
     resouce_class: medium
     working_directory: ~/testcontainers-examples
 
