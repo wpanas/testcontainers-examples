@@ -5,8 +5,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.awaitility.kotlin.await
 import org.awaitility.kotlin.has
 import org.awaitility.kotlin.untilCallTo
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.not
+import org.hamcrest.CoreMatchers.*
 import org.hamcrest.Matchers.containsInAnyOrder
 import org.hamcrest.text.IsEmptyString.emptyString
 import org.junit.jupiter.api.BeforeEach
@@ -74,7 +73,7 @@ internal class OrderControllerTest {
 					status { isOk }
 					jsonPath("$.coffee", `is`(order.coffee))
 					jsonPath("$.id", `is`(order.id.toString()))
-					jsonPath("$.isDone", `is`(order.isDone))
+					jsonPath("$.isDone", isA(Boolean::class.java))
 				}
 	}
 
@@ -91,6 +90,7 @@ internal class OrderControllerTest {
 				.andExpect {
 					status { isOk }
 					jsonPath("$[*].coffee", containsInAnyOrder(firstOrder.coffee, secondOrder.coffee))
+					jsonPath("$[*].id", containsInAnyOrder(firstOrder.id.toString(), secondOrder.id.toString()))
 				}
 	}
 
