@@ -12,22 +12,22 @@ import org.springframework.test.context.ContextConfiguration
 @ContextConfiguration(initializers = [KafkaInitializer::class])
 internal class OrderProcessorTest {
 
-	@Autowired
-	lateinit var underTest: OrderProcessor
+    @Autowired
+    lateinit var underTest: OrderProcessor
 
-	@Autowired
-	lateinit var orderService: OrderService
+    @Autowired
+    lateinit var orderService: OrderService
 
-	@Test
-	internal fun `should process orders`() {
-		val details = OrderDetails("Latte")
-		val orderId = orderService.placeOrder(details).id
+    @Test
+    internal fun `should process orders`() {
+        val details = OrderDetails("Latte")
+        val orderId = orderService.placeOrder(details).id
 
-		underTest.onMessage(ConsumerRecord(topic, 0, 0, orderId.toString(), details))
+        underTest.onMessage(ConsumerRecord(topic, 0, 0, orderId.toString(), details))
 
-		val order = orderService.findOne(orderId)
+        val order = orderService.findOne(orderId)
 
-		assertNotNull(order)
-		assertTrue(order?.isDone!!)
-	}
+        assertNotNull(order)
+        assertTrue(order?.isDone!!)
+    }
 }
