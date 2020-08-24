@@ -1,15 +1,21 @@
 package com.github.wpanas.spring.junit
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.notNullValue
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.ResultActionsDsl
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
 import org.testcontainers.containers.PostgreSQLContainer
@@ -48,7 +54,7 @@ internal class CatControllerTest {
 
     @Test
     internal fun `should add new cat`() {
-        mockMvc.post("/cats") {
+        val cat = mockMvc.post("/cats") {
             content =
                 """{"name": "Sherry"}"""
             contentType = APPLICATION_JSON
@@ -58,7 +64,12 @@ internal class CatControllerTest {
             .andExpect {
                 status { isOk }
                 jsonPath("$.name", `is`("Sherry"))
+                jsonPath("$.id", `is`(notNullValue()))
             }
+            .toCat()
+
+        val foundCat = catRepository.findByIdOrNull(cat.id!!)
+        assertEquals(foundCat, cat)
     }
 
     @Test
@@ -79,4 +90,14 @@ internal class CatControllerTest {
                 jsonPath("$.content[1].name", `is`(linda.name))
             }
     }
+
+    @Autowired
+    lateinit var objectMapper: ObjectMapper
+
+    private fun ResultActionsDsl.toCat() = andReturn()
+        .response
+        .contentAsString
+        .let {
+            objectMapper.readValue<Cat>(it)
+        }
 }
