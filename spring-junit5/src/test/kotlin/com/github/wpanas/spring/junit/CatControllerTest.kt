@@ -7,6 +7,8 @@ import org.hamcrest.CoreMatchers.notNullValue
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -19,6 +21,7 @@ import org.springframework.test.web.servlet.ResultActionsDsl
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
 import org.testcontainers.containers.PostgreSQLContainer
+import org.testcontainers.containers.output.Slf4jLogConsumer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 
@@ -28,9 +31,15 @@ import org.testcontainers.junit.jupiter.Testcontainers
 internal class CatControllerTest {
 
     companion object {
+        @JvmStatic
+        val logger: Logger = LoggerFactory.getLogger(CatControllerTest::class.java)
+
         @Container
         @JvmStatic
-        val postgreSQLContainer = PostgreSQLContainer<Nothing>()
+        val postgreSQLContainer = PostgreSQLContainer<Nothing>().apply {
+            withLogConsumer(Slf4jLogConsumer(logger))
+            withDatabaseName("cats_shelter")
+        }
 
         @DynamicPropertySource
         @JvmStatic
