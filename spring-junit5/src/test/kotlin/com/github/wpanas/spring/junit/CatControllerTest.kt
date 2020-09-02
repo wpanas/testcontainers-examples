@@ -31,18 +31,16 @@ import org.testcontainers.junit.jupiter.Testcontainers
 internal class CatControllerTest {
 
     companion object {
-        @JvmStatic
-        val logger: Logger = LoggerFactory.getLogger(CatControllerTest::class.java)
+        private val logger: Logger = LoggerFactory.getLogger(CatControllerTest::class.java)
 
         @Container
-        @JvmStatic
         val postgreSQLContainer = PostgreSQLContainer<Nothing>().apply {
             withLogConsumer(Slf4jLogConsumer(logger))
             withDatabaseName("cats_shelter")
         }
 
-        @DynamicPropertySource
         @JvmStatic
+        @DynamicPropertySource
         fun postgreProperties(registry: DynamicPropertyRegistry) {
             registry.add("spring.datasource.url", postgreSQLContainer::getJdbcUrl)
             registry.add("spring.datasource.username", postgreSQLContainer::getUsername)
