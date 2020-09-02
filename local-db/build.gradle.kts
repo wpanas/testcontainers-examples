@@ -24,4 +24,10 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
+springBoot {
+	mainClassName = when (project.hasProperty("local")) {
+		true -> "com.github.wpanas.spring.local.LocalApplicationKt"
+		else -> "com.github.wpanas.spring.local.ApplicationKt"
+	}
+}
 

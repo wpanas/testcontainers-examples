@@ -24,3 +24,10 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+springBoot {
+	mainClassName = when (project.hasProperty("local")) {
+		true -> "com.github.wpanas.spring.kafka.LocalKafkaApplicationKt"
+		else -> "com.github.wpanas.spring.kafka.KafkaApplicationKt"
+	}
+}

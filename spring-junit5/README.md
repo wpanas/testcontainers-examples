@@ -37,3 +37,12 @@ dependencies {
 ```
 
 [Full code](./build.gradle.kts)
+
+# How to run it?
+
+All modules share common Gradle wrapper and configuration. Go back to 
+repository's main directory and run:
+
+```shell script
+./gradlew spring-junit5:bootRun -Plocal
+```
