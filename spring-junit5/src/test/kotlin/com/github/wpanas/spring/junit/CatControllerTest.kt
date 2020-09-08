@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultActionsDsl
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
+import org.testcontainers.containers.BindMode.READ_ONLY
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.containers.output.Slf4jLogConsumer
 import org.testcontainers.junit.jupiter.Container
@@ -31,13 +32,16 @@ import org.testcontainers.junit.jupiter.Testcontainers
 internal class CatControllerTest {
 
     companion object {
+        private const val containerPath = "/docker-entrypoint-initdb.d/"
         private val logger: Logger = LoggerFactory.getLogger(CatControllerTest::class.java)
 
         @Container
-        val postgreSQLContainer = PostgreSQLContainer<Nothing>().apply {
-            withLogConsumer(Slf4jLogConsumer(logger))
-            withDatabaseName("cats_shelter")
-        }
+        val postgreSQLContainer = PostgreSQLContainer<Nothing>("postgres:12.4")
+            .apply {
+                withLogConsumer(Slf4jLogConsumer(logger))
+                withDatabaseName("cats_shelter")
+                withClasspathResourceMapping("init.sql", containerPath, READ_ONLY)
+            }
 
         @JvmStatic
         @DynamicPropertySource

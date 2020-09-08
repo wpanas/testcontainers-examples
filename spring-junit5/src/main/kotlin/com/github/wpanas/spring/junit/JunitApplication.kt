@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType.IDENTITY
 import javax.persistence.Id
 
 @SpringBootApplication
@@ -24,7 +25,7 @@ fun main(args: Array<String>) {
 
 @Entity
 data class Cat(
-    @field:Id @field:GeneratedValue val id: Long?,
+    @field:Id @field:GeneratedValue(strategy = IDENTITY) val id: Long?,
     val name: String
 )
 
