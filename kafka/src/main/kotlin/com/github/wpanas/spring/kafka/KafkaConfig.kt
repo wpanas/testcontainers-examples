@@ -22,7 +22,9 @@ class KafkaConfig {
 }
 
 class KafkaInitializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
-    private val kafkaContainer = KafkaContainer()
+    private val kafkaContainer = KafkaContainer().apply {
+        withTmpFs(mapOf("/var/lib/kafka/data" to "rw"))
+    }
 
     override fun initialize(applicationContext: ConfigurableApplicationContext) {
         kafkaContainer.start()

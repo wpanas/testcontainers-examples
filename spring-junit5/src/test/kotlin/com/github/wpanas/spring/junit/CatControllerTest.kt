@@ -41,6 +41,7 @@ internal class CatControllerTest {
                 withLogConsumer(Slf4jLogConsumer(logger))
                 withDatabaseName("cats_shelter")
                 withClasspathResourceMapping("init.sql", containerPath, READ_ONLY)
+                withTmpFs(mapOf("/var/lib/postgresql/data" to "rw"))
             }
 
         @JvmStatic

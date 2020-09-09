@@ -14,7 +14,9 @@ fun main(args: Array<String>) {
 
 class PostgreSQLInitializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
     companion object {
-        val postgreSQLContainer = PostgreSQLContainer<Nothing>()
+        val postgreSQLContainer = PostgreSQLContainer<Nothing>().apply {
+            withTmpFs(mapOf("/var/lib/postgresql/data" to "rw"))
+        }
     }
 
     override fun initialize(applicationContext: ConfigurableApplicationContext) {
