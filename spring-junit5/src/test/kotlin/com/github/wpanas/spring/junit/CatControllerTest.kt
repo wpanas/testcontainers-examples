@@ -25,6 +25,7 @@ import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.containers.output.Slf4jLogConsumer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
+import org.testcontainers.utility.DockerImageName
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -36,7 +37,9 @@ internal class CatControllerTest {
         private val logger: Logger = LoggerFactory.getLogger(CatControllerTest::class.java)
 
         @Container
-        val postgreSQLContainer = PostgreSQLContainer<Nothing>("postgres:12.4")
+        val postgreSQLContainer = PostgreSQLContainer<Nothing>(
+            DockerImageName.parse("postgres:12.4")
+        )
             .apply {
                 withLogConsumer(Slf4jLogConsumer(logger))
                 withDatabaseName("cats_shelter")

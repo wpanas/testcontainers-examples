@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.core.env.MapPropertySource
 import org.testcontainers.containers.PostgreSQLContainer
+import org.testcontainers.utility.DockerImageName
 
 fun main(args: Array<String>) {
     runApplication<Application>(*args) {
@@ -14,7 +15,9 @@ fun main(args: Array<String>) {
 
 class PostgreSQLInitializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
     companion object {
-        val postgreSQLContainer = PostgreSQLContainer<Nothing>()
+        val postgreSQLContainer = PostgreSQLContainer<Nothing>(
+            DockerImageName.parse("postgres:12.4")
+        )
     }
 
     override fun initialize(applicationContext: ConfigurableApplicationContext) {

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.MapPropertySource
 import org.springframework.kafka.config.TopicBuilder
 import org.testcontainers.containers.KafkaContainer
+import org.testcontainers.utility.DockerImageName
 
 const val topic = "com.github.wpanas.orders"
 
@@ -22,7 +23,9 @@ class KafkaConfig {
 }
 
 class KafkaInitializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
-    private val kafkaContainer = KafkaContainer()
+    private val kafkaContainer = KafkaContainer(
+        DockerImageName.parse("confluentinc/cp-kafka")
+    )
 
     override fun initialize(applicationContext: ConfigurableApplicationContext) {
         kafkaContainer.start()
