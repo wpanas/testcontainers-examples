@@ -38,7 +38,7 @@ internal class CatControllerTest {
         }
             .andDo { print() }
             .andExpect {
-                status { isOk }
+                status { isOk() }
                 jsonPath("$.name", `is`("Sherry"))
             }
     }
@@ -53,7 +53,7 @@ internal class CatControllerTest {
         }
             .andDo { print() }
             .andExpect {
-                status { isOk }
+                status { isOk() }
                 jsonPath("$.totalElements", `is`(2))
                 jsonPath("$.content[0].id", `is`(benny.id?.toInt()))
                 jsonPath("$.content[0].name", `is`(benny.name))

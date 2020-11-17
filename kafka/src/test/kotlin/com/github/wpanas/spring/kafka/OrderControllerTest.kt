@@ -50,7 +50,7 @@ internal class OrderControllerTest {
         }
             .andDo { print() }
             .andExpect {
-                status { isOk }
+                status { isOk() }
                 jsonPath("$.coffee", `is`("Espresso"))
                 jsonPath("$.id", `is`(not(emptyString())))
                 jsonPath("$.isDone", `is`(false))
@@ -72,7 +72,7 @@ internal class OrderControllerTest {
         }
             .andDo { print() }
             .andExpect {
-                status { isOk }
+                status { isOk() }
                 jsonPath("$.coffee", `is`(order.coffee))
                 jsonPath("$.id", `is`(order.id.toString()))
                 jsonPath("$.isDone", isA<String>(Boolean::class.java))
@@ -90,7 +90,7 @@ internal class OrderControllerTest {
         }
             .andDo { print() }
             .andExpect {
-                status { isOk }
+                status { isOk() }
                 jsonPath("$[*].coffee", containsInAnyOrder(firstOrder.coffee, secondOrder.coffee))
                 jsonPath("$[*].id", containsInAnyOrder(firstOrder.id.toString(), secondOrder.id.toString()))
             }

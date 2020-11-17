@@ -1,8 +1,8 @@
 plugins {
-	id("org.springframework.boot") version "2.3.3.RELEASE"
-	id("io.spring.dependency-management") version "1.0.9.RELEASE"
-	kotlin("plugin.spring") version "1.4.0"
-	kotlin("plugin.jpa") version "1.4.0"
+	id("org.springframework.boot") version "2.4.0"
+	id("io.spring.dependency-management") version "1.0.10.RELEASE"
+	kotlin("plugin.spring") version "1.4.10"
+	kotlin("plugin.jpa") version "1.4.10"
 }
 
 group = "com.github.wpanas.spring"
