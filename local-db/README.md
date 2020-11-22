@@ -10,32 +10,9 @@ fun main(args: Array<String>) {
 		addInitializers(PostgreSQLInitializer())
 	}
 }
-
-class PostgreSQLInitializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
-	companion object {
-		val postgreSQLContainer = PostgreSQLContainer<Nothing>()
-	}
-
-	override fun initialize(applicationContext: ConfigurableApplicationContext) {
-		postgreSQLContainer.start()
-
-		val properties = mapOf(
-			"spring.datasource.url" to postgreSQLContainer.jdbcUrl,
-			"spring.datasource.username" to postgreSQLContainer.username,
-			"spring.datasource.password" to postgreSQLContainer.password
-		)
-
-		applicationContext.environment.apply {
-			propertySources.addFirst(MapPropertySource(
-					"local",
-					properties
-			))
-		}
-	}
-}
 ```
 
-[Full code](./src/main/kotlin/com/github/wpanas/spring/local/LocalApplication.kt)
+[Full code](./src/test/kotlin/com/github/wpanas/spring/local/LocalApplication.kt)
 
 ## Test code
 
@@ -54,18 +31,18 @@ internal class CatControllerTest {
 
 ```kotlin
 dependencies {
-    implementation(platform("org.testcontainers:testcontainers-bom:1.14.3"))
-    implementation("org.testcontainers:postgresql")
+    testImplementation(platform("org.testcontainers:testcontainers-bom:1.14.3"))
+    testImplementation("org.testcontainers:postgresql")
 }
 ```
 
 [Full code](./build.gradle.kts)
 
-# How to run it?
+# How to run it locally?
 
 All modules share common Gradle wrapper and configuration. Go back to 
 repository's main directory and run:
 
 ```shell script
-./gradlew local-db:bootRun -Plocal
+./gradlew local-db:bootLocalRun
 ```

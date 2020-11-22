@@ -6,6 +6,9 @@ plugins {
 
 group = "com.github.wpanas.spring"
 
+val implementation by configurations
+val testImplementation by configurations
+
 dependencies {
 	implementation("org.springframework.kafka:spring-kafka")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -18,16 +21,16 @@ dependencies {
 	testImplementation("org.awaitility:awaitility:4.0.3")
 	testImplementation("org.awaitility:awaitility-kotlin:4.0.3")
 	testImplementation("org.springframework.kafka:spring-kafka-test")
-	implementation("org.testcontainers:kafka")
+	testImplementation("org.testcontainers:kafka")
 }
 
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-springBoot {
-	mainClassName = when (project.hasProperty("local")) {
-		true -> "com.github.wpanas.spring.kafka.LocalKafkaApplicationKt"
-		else -> "com.github.wpanas.spring.kafka.KafkaApplicationKt"
-	}
+tasks.register<JavaExec>("bootLocalRun") {
+	dependsOn("testClasses")
+	group = "application"
+	classpath = project.the<SourceSetContainer>()["test"].runtimeClasspath
+	main = "com.github.wpanas.spring.kafka.LocalKafkaApplicationKt"
 }

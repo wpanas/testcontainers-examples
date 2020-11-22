@@ -37,12 +37,12 @@ Running tests
 
 To run locally application with a Kafka container configured by Testcontainers.
 ```shell script
-./gradlew kafka:bootRun -Plocal
+./gradlew kafka:bootLocalRun
 ```
 
 To run locally application with a PostgreSQL container configured by Testcontainers.
 ```shell script
-./gradlew local-db:bootRun -Plocal
+./gradlew local-db:bootLocalRun
 ```
 
 # Troubleshooting
