@@ -1,13 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	kotlin("jvm") version "1.4.10" apply false
-	id("org.jmailen.kotlinter") version "3.2.0"
+	kotlin("jvm") version "1.4.30" apply false
+	id("org.jmailen.kotlinter") version "3.3.0"
 }
 
 buildscript {
 	dependencies {
-		classpath("org.jmailen.gradle:kotlinter-gradle:3.2.0")
+		classpath("org.jmailen.gradle:kotlinter-gradle:3.3.0")
 	}
 }
 
@@ -26,7 +26,7 @@ subprojects {
 	val implementation by configurations
 
 	dependencies {
-		implementation(platform("org.testcontainers:testcontainers-bom:1.15.0"))
+		implementation(platform("org.testcontainers:testcontainers-bom:1.15.2"))
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
 		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	}
