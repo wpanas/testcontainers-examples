@@ -26,7 +26,7 @@ subprojects {
 	val implementation by configurations
 
 	dependencies {
-		implementation(platform("org.testcontainers:testcontainers-bom:1.15.2"))
+		implementation(platform("org.testcontainers:testcontainers-bom:1.15.3"))
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
 		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	}
