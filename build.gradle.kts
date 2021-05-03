@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	kotlin("jvm") version "1.4.32" apply false
-	id("org.jmailen.kotlinter") version "3.4.0"
+	id("org.jmailen.kotlinter") version "3.4.3"
 }
 
 buildscript {
