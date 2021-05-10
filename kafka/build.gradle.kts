@@ -19,7 +19,7 @@ dependencies {
 	}
 
 	testImplementation("org.awaitility:awaitility:4.0.3")
-	testImplementation("org.awaitility:awaitility-kotlin:4.0.3")
+	testImplementation("org.awaitility:awaitility-kotlin:4.1.0")
 	testImplementation("org.springframework.kafka:spring-kafka-test")
 	testImplementation("org.testcontainers:kafka")
 }
