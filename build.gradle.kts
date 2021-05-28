@@ -1,14 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	kotlin("jvm") version "1.4.32" apply false
-	id("org.jmailen.kotlinter") version "3.4.0"
-}
-
-buildscript {
-	dependencies {
-		classpath("org.jmailen.gradle:kotlinter-gradle:3.4.0")
-	}
+	kotlin("jvm") version "1.5.0" apply false
+	id("org.jmailen.kotlinter") version "3.4.4"
 }
 
 subprojects {

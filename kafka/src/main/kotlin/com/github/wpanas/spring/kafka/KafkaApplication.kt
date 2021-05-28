@@ -82,11 +82,9 @@ class OrderProcessor(private val orderService: OrderService) : MessageListener<S
         groupId = "\${order-processor.group-id}",
         autoStartup = "\${order-processor.enabled:false}"
     )
-    override fun onMessage(data: ConsumerRecord<String, OrderDetails>?) {
-        data?.let { record ->
-            logger.info("Processing order: ${record.value()} with id: ${record.key()}")
-            orderService.finishOrder(UUID.fromString(record.key()))
-        }
+    override fun onMessage(record: ConsumerRecord<String, OrderDetails>) {
+        logger.info("Processing order: ${record.value()} with id: ${record.key()}")
+        orderService.finishOrder(UUID.fromString(record.key()))
     }
 
     companion object {
