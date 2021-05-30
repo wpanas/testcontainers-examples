@@ -1,13 +1,10 @@
 plugins {
 	id("org.springframework.boot") version "2.5.0"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("plugin.spring") version "1.5.0"
+	kotlin("plugin.spring") version "1.5.10"
 }
 
 group = "com.github.wpanas.spring"
-
-val implementation by configurations
-val testImplementation by configurations
 
 dependencies {
 	implementation("org.springframework.kafka:spring-kafka")
