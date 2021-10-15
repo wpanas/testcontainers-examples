@@ -5,8 +5,8 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.awaitility.kotlin.await
 import org.awaitility.kotlin.has
 import org.awaitility.kotlin.untilCallTo
-import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.containsInAnyOrder
+import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.isA
 import org.hamcrest.Matchers.not
 import org.hamcrest.text.IsEmptyString.emptyString
