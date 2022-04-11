@@ -8,7 +8,7 @@ import org.testcontainers.utility.DockerImageName
 
 class PostgreSQLInitializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
     private companion object {
-        val postgreSQLContainer = PostgreSQLContainer<Nothing>(
+        val postgreSQLContainer = PostgreSQLContainer(
             DockerImageName.parse("postgres:12.4")
         )
     }

@@ -37,7 +37,7 @@ internal class CatControllerTest {
         private val logger: Logger = LoggerFactory.getLogger(CatControllerTest::class.java)
 
         @Container
-        val postgreSQLContainer = PostgreSQLContainer<Nothing>(
+        val postgreSQLContainer = PostgreSQLContainer(
             DockerImageName.parse("postgres:12.4")
         )
             .apply {

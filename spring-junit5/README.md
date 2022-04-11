@@ -11,7 +11,7 @@ internal class CatControllerTest {
     companion object {
     	@Container
     	@JvmStatic
-    	val postgreSQLContainer = PostgreSQLContainer<Nothing>()
+    	val postgreSQLContainer = PostgreSQLContainer()
     
     	@DynamicPropertySource
     	@JvmStatic
