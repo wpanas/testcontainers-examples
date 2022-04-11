@@ -2,10 +2,11 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
-version: 2
+version: 2.0
 jobs:
   build:
-    machine: true # https://www.testcontainers.org/supported_docker_environment/continuous_integration/circle_ci/
+    machine:
+      image: ubuntu-2004:202010-01 # https://www.testcontainers.org/supported_docker_environment/continuous_integration/circle_ci/
     resouce_class: medium
     working_directory: ~/testcontainers-examples
 
