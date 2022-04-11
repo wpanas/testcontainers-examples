@@ -1,12 +1,22 @@
 plugins {
+	kotlin("jvm") version "1.6.20"
 	id("org.springframework.boot") version "2.6.6"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	kotlin("plugin.spring") version "1.6.20"
+	id("org.jmailen.kotlinter") version "3.10.0"
 }
 
 group = "com.github.wpanas.spring"
 
+repositories {
+	mavenCentral()
+}
+
 dependencies {
+	implementation(platform("org.testcontainers:testcontainers-bom:1.16.3"))
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
 	implementation("org.springframework.kafka:spring-kafka")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -29,5 +39,5 @@ tasks.register<JavaExec>("bootLocalRun") {
 	dependsOn("testClasses")
 	group = "application"
 	classpath = project.the<SourceSetContainer>()["test"].runtimeClasspath
-	main = "com.github.wpanas.spring.kafka.LocalKafkaApplicationKt"
+	mainClass.set("com.github.wpanas.spring.kafka.LocalKafkaApplicationKt")
 }
