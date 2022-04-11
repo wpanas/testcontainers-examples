@@ -1,7 +1,7 @@
 plugins {
-	id("org.springframework.boot") version "2.5.5"
+	id("org.springframework.boot") version "2.6.6"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("plugin.spring") version "1.5.31"
+	kotlin("plugin.spring") version "1.6.20"
 }
 
 group = "com.github.wpanas.spring"
@@ -15,8 +15,8 @@ dependencies {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
 
-	testImplementation("org.awaitility:awaitility:4.1.0")
-	testImplementation("org.awaitility:awaitility-kotlin:4.1.0")
+	testImplementation("org.awaitility:awaitility:4.2.0")
+	testImplementation("org.awaitility:awaitility-kotlin:4.2.0")
 	testImplementation("org.springframework.kafka:spring-kafka-test")
 	testImplementation("org.testcontainers:kafka")
 }
