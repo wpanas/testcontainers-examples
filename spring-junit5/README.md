@@ -1,6 +1,6 @@
 # Spring JPA with PostgreSQL
 
-This is all you need to set up PostgreSQL container inside Spring Boot Test.
+This is all you need to set up PostgreSQL container inside Spring Boot Test with JUnit 5.
 
 ## Test code
 
