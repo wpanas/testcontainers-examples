@@ -15,6 +15,7 @@ Current tests status is:
 # Sample projects
 
 - [Simplest Spring MVC & JPA based on PostgreSQL](./spring-junit5/README.md)
+- [Spring MVC & JPA with Kotest tests](./spring-kotest/README.md)
 - [Spring MVC & JPA with configured PostgreSQL local running](./local-db/README.md)
 - [Spring Kafka with configured local running](./kafka/README.md)
 
@@ -33,6 +34,9 @@ Running tests
 
 # run spring-junit5 tests
 ./gradlew spring-junit5:check 
+
+# run spring-kotest tests
+./gradlew spring-kotest:check
 ```
 
 To run locally application with a Kafka container configured by Testcontainers.
