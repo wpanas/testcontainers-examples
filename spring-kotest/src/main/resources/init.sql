@@ -1,0 +1,4 @@
+CREATE TABLE cat (
+    id SERIAL PRIMARY KEY NOT NULL,
+    name VARCHAR NOT NULL
+);
