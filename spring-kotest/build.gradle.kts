@@ -4,7 +4,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("plugin.spring") version "1.6.20"
     kotlin("plugin.jpa") version "1.6.20"
-    id("org.jmailen.kotlinter") version "3.10.0"
+    id("org.jmailen.kotlinter") version "3.11.1"
 }
 
 group = "com.github.wpanas.spring"
