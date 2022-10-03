@@ -3,7 +3,7 @@ plugins {
     id("org.springframework.boot") version "2.6.6"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("plugin.spring") version "1.6.20"
-    kotlin("plugin.jpa") version "1.6.20"
+    kotlin("plugin.jpa") version "1.7.20"
     id("org.jmailen.kotlinter") version "3.10.0"
 }
 
