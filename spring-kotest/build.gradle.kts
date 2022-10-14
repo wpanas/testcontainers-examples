@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("org.testcontainers:testcontainers-bom:1.17.1"))
+    implementation(platform("org.testcontainers:testcontainers-bom:1.17.4"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
 
@@ -30,11 +30,11 @@ dependencies {
 
     testImplementation("org.testcontainers:postgresql")
 
-    testImplementation(platform("io.kotest:kotest-bom:5.2.3"))
+    testImplementation(platform("io.kotest:kotest-bom:5.5.0"))
     testImplementation("io.kotest:kotest-runner-junit5")
-    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.1")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
+    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
 }
 
 tasks.withType<Test> {

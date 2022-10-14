@@ -41,3 +41,4 @@ build
 
 .idea/libraries-with-intellij-classes.xml
 .idea/csv-plugin.xml
+.idea/kotlinc.xml
