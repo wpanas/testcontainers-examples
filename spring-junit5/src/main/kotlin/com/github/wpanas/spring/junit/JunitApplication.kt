@@ -25,7 +25,9 @@ fun main(args: Array<String>) {
 
 @Entity
 data class Cat(
-    @field:Id @field:GeneratedValue(strategy = IDENTITY) val id: Long?,
+    @field:Id
+    @field:GeneratedValue(strategy = IDENTITY)
+    val id: Long?,
     val name: String
 )
 

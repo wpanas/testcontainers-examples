@@ -24,7 +24,9 @@ fun main(args: Array<String>) {
 
 @Entity
 data class Cat(
-    @field:Id @field:GeneratedValue val id: Long?,
+    @field:Id
+    @field:GeneratedValue
+    val id: Long?,
     val name: String
 )
 
