@@ -5,9 +5,8 @@
 version: 2.0
 jobs:
   build:
-    machine:
-      image: ubuntu-2004:202104-01 # https://circleci.com/docs/using-linuxvm/#use-machine-with-docker
-    resouce_class: medium
+    machine: # https://circleci.com/docs/using-linuxvm/#use-machine-with-docker
+      image: cimg/openjdk:17.0 # https://github.com/CircleCI-Public/cimg-openjdk
     working_directory: ~/testcontainers-examples
 
     environment:
