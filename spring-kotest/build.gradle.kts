@@ -30,7 +30,7 @@ dependencies {
 
     testImplementation("org.testcontainers:postgresql")
 
-    testImplementation(platform("io.kotest:kotest-bom:5.5.1"))
+    testImplementation(platform("io.kotest:kotest-bom:5.5.2"))
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4")
