@@ -7,13 +7,12 @@ I hope it will help you use it in your own projects.
 
 All samples are build with [Kotlin](https://kotlinlang.org/), [Gradle](https://gradle.org/)
 & [JUnit 5](https://junit.org/junit5/).
-Continuous integration is running at [CircleCI](https://circleci.com/).
 
 👉 If you use JDK 17+ & Spring Boot 3.1+ go straight
 to the [simplest project](./spring6-junit5/README.md).
 
 Current tests status is:
-[![wpanas](https://circleci.com/gh/wpanas/testcontainers-examples.svg?style=svg)](https://circleci.com/gh/wpanas/testcontainers-examples)
+[![wpanas](https://github.com/wpanas/testcontainers-examples/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/wpanas/testcontainers-examples/actions/workflows/ci.yml?query=branch%3Amaster)
 
 # Sample projects
 
