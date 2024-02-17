@@ -1,9 +1,9 @@
 plugins {
-	kotlin("jvm") version "1.7.20"
-	id("org.springframework.boot") version "2.7.4"
-	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("plugin.spring") version "1.7.20"
-	id("org.jmailen.kotlinter") version "3.12.0"
+	kotlin("jvm")
+	id("org.springframework.boot") version "2.7.18"
+	id("io.spring.dependency-management") version "1.1.4"
+	kotlin("plugin.spring") version "1.9.22"
+	id("org.jmailen.kotlinter") version "4.2.0"
 }
 
 group = "com.github.wpanas.spring"
@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-	implementation(platform("org.testcontainers:testcontainers-bom:1.17.5"))
+	implementation(platform("org.testcontainers:testcontainers-bom:1.19.5"))
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 

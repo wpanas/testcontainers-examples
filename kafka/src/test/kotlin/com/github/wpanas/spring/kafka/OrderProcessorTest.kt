@@ -11,7 +11,6 @@ import org.springframework.test.context.ContextConfiguration
 @SpringBootTest(properties = ["order-processor.enabled=false"])
 @ContextConfiguration(initializers = [KafkaInitializer::class])
 internal class OrderProcessorTest {
-
     @Autowired
     lateinit var underTest: OrderProcessor
 
@@ -23,7 +22,7 @@ internal class OrderProcessorTest {
         val details = OrderDetails("Latte")
         val orderId = orderService.placeOrder(details).id
 
-        underTest.onMessage(ConsumerRecord(topic, 0, 0, orderId.toString(), details))
+        underTest.onMessage(ConsumerRecord(TOPIC, 0, 0, orderId.toString(), details))
 
         val order = orderService.findOne(orderId)
 

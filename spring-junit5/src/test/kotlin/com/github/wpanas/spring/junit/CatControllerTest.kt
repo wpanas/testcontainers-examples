@@ -31,20 +31,20 @@ import org.testcontainers.utility.DockerImageName
 @AutoConfigureMockMvc
 @Testcontainers
 internal class CatControllerTest {
-
     companion object {
-        private const val containerPath = "/docker-entrypoint-initdb.d/"
+        private const val CONTAINER_PATH = "/docker-entrypoint-initdb.d/"
         private val logger: Logger = LoggerFactory.getLogger(CatControllerTest::class.java)
 
         @Container
-        val postgreSQLContainer = PostgreSQLContainer(
-            DockerImageName.parse("postgres:12.4")
-        )
-            .apply {
-                withLogConsumer(Slf4jLogConsumer(logger))
-                withDatabaseName("cats_shelter")
-                withClasspathResourceMapping("init.sql", containerPath, READ_ONLY)
-            }
+        val postgreSQLContainer =
+            PostgreSQLContainer(
+                DockerImageName.parse("postgres:12.4"),
+            )
+                .apply {
+                    withLogConsumer(Slf4jLogConsumer(logger))
+                    withDatabaseName("cats_shelter")
+                    withClasspathResourceMapping("init.sql", CONTAINER_PATH, READ_ONLY)
+                }
 
         @JvmStatic
         @DynamicPropertySource
@@ -68,19 +68,20 @@ internal class CatControllerTest {
 
     @Test
     internal fun `should add new cat`() {
-        val cat = mockMvc.post("/cats") {
-            content =
-                """{"name": "Sherry"}"""
-            contentType = APPLICATION_JSON
-            accept = APPLICATION_JSON
-        }
-            .andDo { print() }
-            .andExpect {
-                status { isOk() }
-                jsonPath("$.name", `is`("Sherry"))
-                jsonPath("$.id", `is`(notNullValue()))
+        val cat =
+            mockMvc.post("/cats") {
+                content =
+                    """{"name": "Sherry"}"""
+                contentType = APPLICATION_JSON
+                accept = APPLICATION_JSON
             }
-            .toCat()
+                .andDo { print() }
+                .andExpect {
+                    status { isOk() }
+                    jsonPath("$.name", `is`("Sherry"))
+                    jsonPath("$.id", `is`(notNullValue()))
+                }
+                .toCat()
 
         val foundCat = catRepository.findByIdOrNull(cat.id!!)
         assertEquals(foundCat, cat)
@@ -108,10 +109,11 @@ internal class CatControllerTest {
     @Autowired
     lateinit var objectMapper: ObjectMapper
 
-    private fun ResultActionsDsl.toCat() = andReturn()
-        .response
-        .contentAsString
-        .let {
-            objectMapper.readValue<Cat>(it)
-        }
+    private fun ResultActionsDsl.toCat() =
+        andReturn()
+            .response
+            .contentAsString
+            .let {
+                objectMapper.readValue<Cat>(it)
+            }
 }

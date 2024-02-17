@@ -28,7 +28,7 @@ data class Cat(
     @field:Id
     @field:GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long?,
-    val name: String
+    val name: String,
 )
 
 data class CreateCatDto(val name: String) {
@@ -46,9 +46,12 @@ interface CatRepository : PagingAndSortingRepository<Cat, Long>
 @RequestMapping("/cats")
 class CatController(private val catRepository: CatRepository) {
     @GetMapping
-    fun findAll(pageable: Pageable): Page<ShowCatDto> = catRepository.findAll(pageable)
-        .map(Cat::toDto)
+    fun findAll(pageable: Pageable): Page<ShowCatDto> =
+        catRepository.findAll(pageable)
+            .map(Cat::toDto)
 
     @PostMapping
-    fun save(@RequestBody catDto: CreateCatDto): ShowCatDto = catRepository.save(catDto.toCat()).toDto()
+    fun save(
+        @RequestBody catDto: CreateCatDto,
+    ): ShowCatDto = catRepository.save(catDto.toCat()).toDto()
 }

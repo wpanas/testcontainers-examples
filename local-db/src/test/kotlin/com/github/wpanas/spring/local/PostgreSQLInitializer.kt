@@ -8,9 +8,10 @@ import org.testcontainers.utility.DockerImageName
 
 class PostgreSQLInitializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
     private companion object {
-        val postgreSQLContainer = PostgreSQLContainer(
-            DockerImageName.parse("postgres:12.4")
-        )
+        val postgreSQLContainer =
+            PostgreSQLContainer(
+                DockerImageName.parse("postgres:12.4"),
+            )
     }
 
     override fun initialize(applicationContext: ConfigurableApplicationContext) {
@@ -19,7 +20,7 @@ class PostgreSQLInitializer : ApplicationContextInitializer<ConfigurableApplicat
         mapOf(
             "spring.datasource.url" to postgreSQLContainer.jdbcUrl,
             "spring.datasource.username" to postgreSQLContainer.username,
-            "spring.datasource.password" to postgreSQLContainer.password
+            "spring.datasource.password" to postgreSQLContainer.password,
         )
             .let(TestPropertyValues::of)
             .applyTo(applicationContext)
