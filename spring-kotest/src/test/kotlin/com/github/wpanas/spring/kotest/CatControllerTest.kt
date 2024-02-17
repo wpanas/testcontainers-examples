@@ -24,54 +24,55 @@ import org.springframework.test.web.servlet.post
 class CatControllerTest(
     val mockMvc: MockMvc,
     val catRepository: CatRepository,
-    val objectMapper: ObjectMapper
+    val objectMapper: ObjectMapper,
 ) : FunSpec({
-    test("should add a new cat") {
-        val cat = mockMvc.post("/cats") {
-            content =
-                """{"name": "Sherry"}"""
-            contentType = APPLICATION_JSON
-            accept = APPLICATION_JSON
+        test("should add a new cat") {
+            val cat =
+                mockMvc.post("/cats") {
+                    content =
+                        """{"name": "Sherry"}"""
+                    contentType = APPLICATION_JSON
+                    accept = APPLICATION_JSON
+                }
+                    .andDo { print() }
+                    .andExpect {
+                        status { isOk() }
+                        jsonPath("$.name", `is`("Sherry"))
+                        jsonPath("$.id", `is`(CoreMatchers.notNullValue()))
+                    }
+                    .toCat(objectMapper)
+
+            val foundCat = catRepository.findByIdOrNull(cat.id!!)
+
+            cat shouldBe foundCat
         }
-            .andDo { print() }
-            .andExpect {
-                status { isOk() }
-                jsonPath("$.name", `is`("Sherry"))
-                jsonPath("$.id", `is`(CoreMatchers.notNullValue()))
+
+        test("should list cats") {
+            val benny = catRepository.save(Cat(id = null, name = "Benny"))
+            val linda = catRepository.save(Cat(id = null, name = "Linda"))
+
+            mockMvc.get("/cats") {
+                accept = APPLICATION_JSON
             }
-            .toCat(objectMapper)
-
-        val foundCat = catRepository.findByIdOrNull(cat.id!!)
-
-        cat shouldBe foundCat
-    }
-
-    test("should list cats") {
-        val benny = catRepository.save(Cat(id = null, name = "Benny"))
-        val linda = catRepository.save(Cat(id = null, name = "Linda"))
-
-        mockMvc.get("/cats") {
-            accept = APPLICATION_JSON
+                .andDo { print() }
+                .andExpect {
+                    status { isOk() }
+                    jsonPath("$.totalElements", `is`(2))
+                    jsonPath("$.content[0].id", `is`(benny.id?.toInt()))
+                    jsonPath("$.content[0].name", `is`(benny.name))
+                    jsonPath("$.content[1].id", `is`(linda.id?.toInt()))
+                    jsonPath("$.content[1].name", `is`(linda.name))
+                }
         }
-            .andDo { print() }
-            .andExpect {
-                status { isOk() }
-                jsonPath("$.totalElements", `is`(2))
-                jsonPath("$.content[0].id", `is`(benny.id?.toInt()))
-                jsonPath("$.content[0].name", `is`(benny.name))
-                jsonPath("$.content[1].id", `is`(linda.id?.toInt()))
-                jsonPath("$.content[1].name", `is`(linda.name))
-            }
-    }
 
-    afterTest {
-        catRepository.deleteAll()
-    }
+        afterTest {
+            catRepository.deleteAll()
+        }
 
-    afterSpec {
-        stopPostgreContainer()
-    }
-}) {
+        afterSpec {
+            stopPostgreContainer()
+        }
+    }) {
     companion object {
         @JvmStatic
         @DynamicPropertySource
@@ -84,9 +85,10 @@ class CatControllerTest(
     }
 }
 
-private fun ResultActionsDsl.toCat(objectMapper: ObjectMapper) = andReturn()
-    .response
-    .contentAsString
-    .let {
-        objectMapper.readValue<Cat>(it)
-    }
+private fun ResultActionsDsl.toCat(objectMapper: ObjectMapper) =
+    andReturn()
+        .response
+        .contentAsString
+        .let {
+            objectMapper.readValue<Cat>(it)
+        }

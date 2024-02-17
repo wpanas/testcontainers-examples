@@ -32,21 +32,27 @@ fun main(args: Array<String>) {
 @RestController
 @RequestMapping("/order")
 class OrderController(private val orderService: OrderService) {
-
     @PostMapping
-    fun placeOrder(@RequestBody orderDto: CreateOrderDto): ShowOrderDto = OrderDetails(orderDto.coffee)
-        .let { orderDetails -> orderService.placeOrder(orderDetails) }
-        .let(Order::toDto)
+    fun placeOrder(
+        @RequestBody orderDto: CreateOrderDto,
+    ): ShowOrderDto =
+        OrderDetails(orderDto.coffee)
+            .let { orderDetails -> orderService.placeOrder(orderDetails) }
+            .let(Order::toDto)
 
     @GetMapping("/{id}")
-    fun checkOrder(@PathVariable("id") id: UUID): ResponseEntity<ShowOrderDto> = orderService.findOne(id)
-        ?.let(Order::toDto)
-        .let { Optional.ofNullable(it) }
-        .let { ResponseEntity.of(it) }
+    fun checkOrder(
+        @PathVariable("id") id: UUID,
+    ): ResponseEntity<ShowOrderDto> =
+        orderService.findOne(id)
+            ?.let(Order::toDto)
+            .let { Optional.ofNullable(it) }
+            .let { ResponseEntity.of(it) }
 
     @GetMapping
-    fun listOrders(): List<ShowOrderDto> = orderService.findAll()
-        .map(Order::toDto)
+    fun listOrders(): List<ShowOrderDto> =
+        orderService.findAll()
+            .map(Order::toDto)
 }
 
 fun Order.toDto() = ShowOrderDto(id, coffee, isDone)
@@ -62,9 +68,10 @@ class OrderService(private val scheduler: OrderProcessingScheduler) {
         return order
     }
 
-    fun finishOrder(orderId: UUID): Order? = findOne(orderId)
-        ?.run { copy(isDone = true) }
-        ?.also { orders[it.id] = it }
+    fun finishOrder(orderId: UUID): Order? =
+        findOne(orderId)
+            ?.run { copy(isDone = true) }
+            ?.also { orders[it.id] = it }
 
     fun findOne(orderId: UUID): Order? = orders[orderId]
 
@@ -78,9 +85,9 @@ class OrderService(private val scheduler: OrderProcessingScheduler) {
 @Component
 class OrderProcessor(private val orderService: OrderService) : MessageListener<String, OrderDetails> {
     @KafkaListener(
-        topics = [topic],
+        topics = [TOPIC],
         groupId = "\${order-processor.group-id}",
-        autoStartup = "\${order-processor.enabled:false}"
+        autoStartup = "\${order-processor.enabled:false}",
     )
     override fun onMessage(record: ConsumerRecord<String, OrderDetails>) {
         logger.info("Processing order: ${record.value()} with id: ${record.key()}")
@@ -95,14 +102,14 @@ class OrderProcessor(private val orderService: OrderService) : MessageListener<S
 @Component
 class OrderProcessingScheduler(private val kafkaTemplate: KafkaTemplate<String, OrderDetails>) {
     fun scheduleProcessing(order: Order) {
-        kafkaTemplate.send(topic, order.id.toString(), OrderDetails(order.coffee))
+        kafkaTemplate.send(TOPIC, order.id.toString(), OrderDetails(order.coffee))
             .addCallback(
                 {
                     logger.info("Scheduled order ${order.id}")
                 },
                 { ex ->
                     logger.error("Scheduling order ${order.id} failed", ex)
-                }
+                },
             )
     }
 

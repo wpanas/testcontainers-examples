@@ -8,22 +8,23 @@ import org.testcontainers.containers.output.Slf4jLogConsumer
 import org.testcontainers.utility.DockerImageName
 
 class PostgreSQLTestContainer : PostgreSQLContainer<Nothing>(
-    DockerImageName.parse("postgres:12.4")
+    DockerImageName.parse("postgres:12.4"),
 ) {
     companion object {
-        private const val containerPath = "/docker-entrypoint-initdb.d/"
+        private const val CONTAINER_PATH = "/docker-entrypoint-initdb.d/"
         private lateinit var instance: PostgreSQLTestContainer
         private val logger: Logger = LoggerFactory.getLogger(PostgreSQLTestContainer::class.java)
 
         @JvmStatic
         fun startPostgreContainer() {
             if (!Companion::instance.isInitialized) {
-                instance = PostgreSQLTestContainer()
-                    .apply {
-                        withLogConsumer(Slf4jLogConsumer(logger))
-                        withDatabaseName("cats_shelter")
-                        withClasspathResourceMapping("init.sql", containerPath, READ_ONLY)
-                    }
+                instance =
+                    PostgreSQLTestContainer()
+                        .apply {
+                            withLogConsumer(Slf4jLogConsumer(logger))
+                            withDatabaseName("cats_shelter")
+                            withClasspathResourceMapping("init.sql", CONTAINER_PATH, READ_ONLY)
+                        }
             }
             instance.start()
         }
@@ -34,7 +35,8 @@ class PostgreSQLTestContainer : PostgreSQLContainer<Nothing>(
         }
 
         @JvmStatic
-        fun postgreContainer(): PostgreSQLContainer<Nothing> = startPostgreContainer()
-            .run { instance }
+        fun postgreContainer(): PostgreSQLContainer<Nothing> =
+            startPostgreContainer()
+                .run { instance }
     }
 }

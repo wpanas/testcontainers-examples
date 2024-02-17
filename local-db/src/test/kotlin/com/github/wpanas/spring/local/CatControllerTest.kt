@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.post
 @ContextConfiguration(initializers = [PostgreSQLInitializer::class])
 @AutoConfigureMockMvc
 internal class CatControllerTest {
-
     @Autowired
     lateinit var mockMvc: MockMvc
 
