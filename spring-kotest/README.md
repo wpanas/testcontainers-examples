@@ -70,9 +70,9 @@ dependencies {
 
     testImplementation(platform("io.kotest:kotest-bom:5.2.3"))
     testImplementation("io.kotest:kotest-runner-junit5")
-    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.1")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
+    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.3")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
 }
 ```
 

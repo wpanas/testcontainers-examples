@@ -9,11 +9,15 @@ All samples are build with [Kotlin](https://kotlinlang.org/), [Gradle](https://g
 & [JUnit 5](https://junit.org/junit5/).
 Continuous integration is running at [CircleCI](https://circleci.com/).
 
+👉 If you use JDK 17+ & Spring Boot 3.1+ go straight
+to the [simplest project](./spring6-junit5/README.md).
+
 Current tests status is:
 [![wpanas](https://circleci.com/gh/wpanas/testcontainers-examples.svg?style=svg)](https://circleci.com/gh/wpanas/testcontainers-examples)
 
 # Sample projects
 
+- **NEW!** [The simples Spring MVC, JPA on PostgreSQL & local running](./spring6-junit5/README.md)
 - [Simplest Spring MVC & JPA based on PostgreSQL](./spring-junit5/README.md)
 - [Spring MVC & JPA with Kotest tests](./spring-kotest/README.md)
 - [Spring MVC & JPA with configured PostgreSQL local running](./local-db/README.md)
@@ -32,11 +36,19 @@ Running tests
 # run local-db module tests
 ./gradlew local-db:check 
 
+# run spring6-junit5 tests
+./gradlew spring6-junit5:check 
+
 # run spring-junit5 tests
 ./gradlew spring-junit5:check 
 
 # run spring-kotest tests
 ./gradlew spring-kotest:check
+```
+
+💥 **NEW!** To run locally application with a PostgreSQL container configured by Testcontainers & Spring Boot 3.1+.
+```shell script
+./gradlew spring6-junit5:bootTestRun
 ```
 
 To run locally application with a Kafka container configured by Testcontainers.
