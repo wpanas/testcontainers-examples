@@ -10,3 +10,16 @@ repository's main directory and run:
 ```shell script
 ./gradlew kafka:bootLocalRun
 ```
+
+## How can you achieve it on your own?
+
+```groovy
+tasks.register<JavaExec>("bootLocalRun") {
+	dependsOn("testClasses")
+	description = "It allows to boot app locally with Testcontainers"
+	group = "application"
+	classpath = project.the<SourceSetContainer>()["test"].runtimeClasspath
+	mainClass.set("com.github.wpanas.spring.kafka.LocalKafkaApplicationKt")
+}
+```
+Change the `mainClass` and you're ready to go.
