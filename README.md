@@ -30,39 +30,47 @@ Current tests status is:
 
 # How to use it?
 
-Running tests
+## Run all tests
 ```shell script
-# run all tests
 ./gradlew check 
+```
 
-# run kafka module tests
+## Run kafka module tests
+```shell
 ./gradlew kafka:check
-
-# run local-db module tests
+```
+## Run postgres module tests
+```shell
 ./gradlew local-db:check 
-
-# run spring6-junit5 tests
+```
+## Run spring6-junit5 tests
+```shell
 ./gradlew spring6-junit5:check 
+```
 
-# run spring-junit5 tests
-./gradlew spring-junit5:check 
+## Run spring-junit5 tests
+```shell
+./gradlew spring-junit5:check
+``` 
 
-# run spring-kotest tests
+## Run spring-kotest tests
+```shell
 ./gradlew spring-kotest:check
 ```
 
-💥 **NEW!** To run locally application with a PostgreSQL container configured by Testcontainers & Spring Boot 3.1+.
-```shell script
+# How to run local development?
+💥 **NEW!** To run locally application with a Postgresql container configured by Testcontainers & Spring Boot 3.1+.
+```shell
 ./gradlew spring6-junit5:bootTestRun
 ```
 
 To run locally application with a Kafka container configured by Testcontainers.
-```shell script
+```shell
 ./gradlew kafka:bootLocalRun
 ```
 
-To run locally application with a PostgreSQL container configured by Testcontainers.
-```shell script
+To run locally application with a Postgresql container configured by Testcontainers.
+```shell
 ./gradlew local-db:bootLocalRun
 ```
 
