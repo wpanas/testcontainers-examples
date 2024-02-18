@@ -9,18 +9,24 @@ All samples are build with [Kotlin](https://kotlinlang.org/), [Gradle](https://g
 & [JUnit 5](https://junit.org/junit5/).
 
 👉 If you use JDK 17+ & Spring Boot 3.1+ go straight
-to the [simplest project](./spring6-junit5/README.md).
+to the [simplest project](./spring6-junit5/README.md). 
+Other projects use older Spring Boot 2.7 to show
+how to use Testcontainers without all great advancements
+that since were made. As for now, 2.7 is still commercially supported
+until 2025-08-24. I encourage you to update Spring Boot according
+to the [official support timeline](https://spring.io/projects/spring-boot#support)
+to have the best experience with Testcontainers and what not.
 
 Current tests status is:
 [![wpanas](https://github.com/wpanas/testcontainers-examples/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/wpanas/testcontainers-examples/actions/workflows/ci.yml?query=branch%3Amaster)
 
 # Sample projects
 
-- **NEW!** [The simples Spring MVC, JPA on PostgreSQL & local running](./spring6-junit5/README.md)
-- [Simplest Spring MVC & JPA based on PostgreSQL](./spring-junit5/README.md)
-- [Spring MVC & JPA with Kotest tests](./spring-kotest/README.md)
-- [Spring MVC & JPA with configured PostgreSQL local running](./local-db/README.md)
-- [Spring Kafka with configured local running](./kafka/README.md)
+- **NEW!** [[Spring Boot 3.1+]: The simplest Spring MVC, JPA on PostgreSQL & local running](./spring6-junit5/README.md)
+- [[Spring Boot 2.7]: MVC & JPA with PostgreSQL](./spring-junit5/README.md)
+- [[Spring Boot 2.7]: MVC & JPA with Kotest tests](./spring-kotest/README.md)
+- [[Spring Boot 2.7]: MVC & JPA with PostgreSQL & local running](./local-db/README.md)
+- [[Spring Boot 2.7]: Kafka with local running](./kafka/README.md)
 
 # How to use it?
 

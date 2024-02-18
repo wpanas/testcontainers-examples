@@ -22,7 +22,7 @@ internal class CatControllerTest {
 
 ```kotlin
 dependencies {
-    implementation(platform("org.testcontainers:testcontainers-bom:1.15.2"))
+    implementation(platform("org.testcontainers:testcontainers-bom:1.19.5"))
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
