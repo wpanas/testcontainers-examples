@@ -17,7 +17,7 @@ until 2025-08-24. I encourage you to update Spring Boot according
 to the [official support timeline](https://spring.io/projects/spring-boot#support)
 to have the best experience with Testcontainers and what not.
 
-Current tests status is:
+## Current tests status is:
 [![wpanas](https://github.com/wpanas/testcontainers-examples/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/wpanas/testcontainers-examples/actions/workflows/ci.yml?query=branch%3Amaster)
 
 # Sample projects
