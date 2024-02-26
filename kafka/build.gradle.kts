@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-	implementation(platform("org.testcontainers:testcontainers-bom:1.19.5"))
+	implementation(platform("org.testcontainers:testcontainers-bom:1.19.6"))
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
