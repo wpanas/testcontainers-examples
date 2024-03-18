@@ -25,8 +25,8 @@ dependencies {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
 
-	testImplementation("org.awaitility:awaitility:4.2.0")
-	testImplementation("org.awaitility:awaitility-kotlin:4.2.0")
+	testImplementation("org.awaitility:awaitility:4.2.1")
+	testImplementation("org.awaitility:awaitility-kotlin:4.2.1")
 	testImplementation("org.springframework.kafka:spring-kafka-test")
 	testImplementation("org.testcontainers:kafka")
 }
