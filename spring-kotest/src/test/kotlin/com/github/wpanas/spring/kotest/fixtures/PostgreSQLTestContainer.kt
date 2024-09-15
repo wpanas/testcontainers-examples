@@ -7,9 +7,10 @@ import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.containers.output.Slf4jLogConsumer
 import org.testcontainers.utility.DockerImageName
 
-class PostgreSQLTestContainer : PostgreSQLContainer<Nothing>(
-    DockerImageName.parse("postgres:12.4"),
-) {
+class PostgreSQLTestContainer :
+    PostgreSQLContainer<Nothing>(
+        DockerImageName.parse("postgres:12.4"),
+    ) {
     companion object {
         private const val CONTAINER_PATH = "/docker-entrypoint-initdb.d/"
         private lateinit var instance: PostgreSQLTestContainer

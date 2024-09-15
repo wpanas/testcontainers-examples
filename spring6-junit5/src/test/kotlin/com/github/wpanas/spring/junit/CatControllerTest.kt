@@ -39,12 +39,11 @@ internal class CatControllerTest {
         val postgreSQLContainer =
             PostgreSQLContainer(
                 DockerImageName.parse("postgres:12.4"),
-            )
-                .apply {
-                    withLogConsumer(Slf4jLogConsumer(logger))
-                    withDatabaseName("cats_shelter")
-                    withClasspathResourceMapping("init.sql", CONTAINER_PATH, READ_ONLY)
-                }
+            ).apply {
+                withLogConsumer(Slf4jLogConsumer(logger))
+                withDatabaseName("cats_shelter")
+                withClasspathResourceMapping("init.sql", CONTAINER_PATH, READ_ONLY)
+            }
     }
 
     @Autowired
@@ -61,19 +60,18 @@ internal class CatControllerTest {
     @Test
     internal fun `should add new cat`() {
         val cat =
-            mockMvc.post("/cats") {
-                content =
-                    """{"name": "Sherry"}"""
-                contentType = APPLICATION_JSON
-                accept = APPLICATION_JSON
-            }
-                .andDo { print() }
+            mockMvc
+                .post("/cats") {
+                    content =
+                        """{"name": "Sherry"}"""
+                    contentType = APPLICATION_JSON
+                    accept = APPLICATION_JSON
+                }.andDo { print() }
                 .andExpect {
                     status { isOk() }
                     jsonPath("$.name", `is`("Sherry"))
                     jsonPath("$.id", `is`(notNullValue()))
-                }
-                .toCat()
+                }.toCat()
 
         val foundCat = catRepository.findByIdOrNull(cat.id!!)
         assertEquals(foundCat, cat)
@@ -84,10 +82,10 @@ internal class CatControllerTest {
         val benny = catRepository.save(Cat(id = null, name = "Benny"))
         val linda = catRepository.save(Cat(id = null, name = "Linda"))
 
-        mockMvc.get("/cats") {
-            accept = APPLICATION_JSON
-        }
-            .andDo { print() }
+        mockMvc
+            .get("/cats") {
+                accept = APPLICATION_JSON
+            }.andDo { print() }
             .andExpect {
                 status { isOk() }
                 jsonPath("$.totalElements", `is`(2))

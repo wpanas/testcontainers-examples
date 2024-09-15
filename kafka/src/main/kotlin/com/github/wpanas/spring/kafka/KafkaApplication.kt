@@ -31,7 +31,9 @@ fun main(args: Array<String>) {
 
 @RestController
 @RequestMapping("/order")
-class OrderController(private val orderService: OrderService) {
+class OrderController(
+    private val orderService: OrderService,
+) {
     @PostMapping
     fun placeOrder(
         @RequestBody orderDto: CreateOrderDto,
@@ -44,21 +46,25 @@ class OrderController(private val orderService: OrderService) {
     fun checkOrder(
         @PathVariable("id") id: UUID,
     ): ResponseEntity<ShowOrderDto> =
-        orderService.findOne(id)
+        orderService
+            .findOne(id)
             ?.let(Order::toDto)
             .let { Optional.ofNullable(it) }
             .let { ResponseEntity.of(it) }
 
     @GetMapping
     fun listOrders(): List<ShowOrderDto> =
-        orderService.findAll()
+        orderService
+            .findAll()
             .map(Order::toDto)
 }
 
 fun Order.toDto() = ShowOrderDto(id, coffee, isDone)
 
 @Service
-class OrderService(private val scheduler: OrderProcessingScheduler) {
+class OrderService(
+    private val scheduler: OrderProcessingScheduler,
+) {
     private val orders: ConcurrentMap<UUID, Order> = ConcurrentHashMap()
 
     fun placeOrder(orderDetails: OrderDetails): Order {
@@ -83,7 +89,9 @@ class OrderService(private val scheduler: OrderProcessingScheduler) {
 }
 
 @Component
-class OrderProcessor(private val orderService: OrderService) : MessageListener<String, OrderDetails> {
+class OrderProcessor(
+    private val orderService: OrderService,
+) : MessageListener<String, OrderDetails> {
     @KafkaListener(
         topics = [TOPIC],
         groupId = "\${order-processor.group-id}",
@@ -100,9 +108,12 @@ class OrderProcessor(private val orderService: OrderService) : MessageListener<S
 }
 
 @Component
-class OrderProcessingScheduler(private val kafkaTemplate: KafkaTemplate<String, OrderDetails>) {
+class OrderProcessingScheduler(
+    private val kafkaTemplate: KafkaTemplate<String, OrderDetails>,
+) {
     fun scheduleProcessing(order: Order) {
-        kafkaTemplate.send(TOPIC, order.id.toString(), OrderDetails(order.coffee))
+        kafkaTemplate
+            .send(TOPIC, order.id.toString(), OrderDetails(order.coffee))
             .addCallback(
                 {
                     logger.info("Scheduled order ${order.id}")
@@ -118,10 +129,22 @@ class OrderProcessingScheduler(private val kafkaTemplate: KafkaTemplate<String, 
     }
 }
 
-data class OrderDetails(val coffee: String)
+data class OrderDetails(
+    val coffee: String,
+)
 
-data class Order(val id: UUID, val coffee: String, val isDone: Boolean)
+data class Order(
+    val id: UUID,
+    val coffee: String,
+    val isDone: Boolean,
+)
 
-data class CreateOrderDto(val coffee: String)
+data class CreateOrderDto(
+    val coffee: String,
+)
 
-data class ShowOrderDto(val id: UUID, val coffee: String, val isDone: Boolean)
+data class ShowOrderDto(
+    val id: UUID,
+    val coffee: String,
+    val isDone: Boolean,
+)
