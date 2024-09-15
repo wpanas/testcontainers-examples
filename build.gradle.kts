@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -14,9 +15,9 @@ allprojects {
 	version = "0.0.1-SNAPSHOT"
 
 	tasks.withType<KotlinCompile> {
-		kotlinOptions {
-			freeCompilerArgs = listOf("-Xjsr305=strict")
-			jvmTarget = "17"
+		compilerOptions {
+			freeCompilerArgs.set(listOf("-Xjsr305=strict"))
+			jvmTarget.set(JvmTarget.JVM_17)
 		}
 	}
 }
