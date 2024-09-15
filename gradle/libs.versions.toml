@@ -6,7 +6,7 @@ spring-current = "3.2.5"
 spring-dependency-management = "1.1.5"
 kotlinter = "4.3.0"
 testcontainers = "1.20.1"
-kotest = "5.9.0"
+kotest = "5.9.1"
 kotest-spring = "1.1.3"
 awaitility = "4.2.1"
 
