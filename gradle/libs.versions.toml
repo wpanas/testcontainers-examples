@@ -1,0 +1,56 @@
+[versions]
+kotlin = "1.9.22"
+kotlinx-coroutines = "1.8.0"
+spring-legacy = "2.7.18"
+spring-current = "3.2.2"
+spring-dependency-management = "1.1.4"
+kotlinter = "4.2.0"
+testcontainers = "1.20.1"
+kotest = "5.8.0"
+kotest-spring = "1.1.3"
+awaitility = "4.2.0"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
+
+spring-boot-legacy = { id = "org.springframework.boot", version.ref = "spring-legacy" }
+spring-boot-current = { id = "org.springframework.boot", version.ref = "spring-current" }
+spring-kotlin = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+spring-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+
+[libraries]
+testcontainers-bom = { group = "org.testcontainers", name = "testcontainers-bom", version.ref = "testcontainers" }
+testcontainers-postgres = { module = "org.testcontainers:postgresql" }
+testcontainers-kafka = { module = "org.testcontainers:kafka" }
+testcontainers-junit = { module = "org.testcontainers:junit-jupiter" }
+kotest-bom = { group = "io.kotest", name = "kotest-bom", version.ref = "kotest" }
+
+kotest-runner = { module = "io.kotest:kotest-runner-junit5" }
+kotest-spring = { module = "io.kotest.extensions:kotest-extensions-spring", version.ref = "kotest-spring" }
+
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
+kotlin-jackson = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
+
+spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
+spring-boot-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+spring-boot-kafka-test = { module = "org.springframework.kafka:spring-kafka-test" }
+spring-boot-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+spring-boot-testcontainers = { module = "org.springframework.boot:spring-boot-testcontainers" }
+spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
+
+awaitility-core = { module = "org.awaitility:awaitility", version.ref = "awaitility" }
+awaitility-kotlin = { module = "org.awaitility:awaitility-kotlin", version.ref = "awaitility" }
+
+postgres = { module = "org.postgresql:postgresql" }
+
+[bundles]
+kotlin = ["kotlin-reflect", "kotlin-stdlib", "kotlin-jackson"]
+kotest = ["kotest-runner", "kotest-spring", "kotlinx-coroutines-core", "kotlinx-coroutines-test"]
+awaitility = ["awaitility-core", "awaitility-kotlin"]

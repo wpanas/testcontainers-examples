@@ -1,9 +1,9 @@
 plugins {
-	kotlin("jvm") version "1.9.22"
-	id("org.springframework.boot") version "2.7.18"
-	id("io.spring.dependency-management") version "1.1.4"
-	kotlin("plugin.spring") version "1.9.22"
-	id("org.jmailen.kotlinter") version "4.2.0"
+	alias(libs.plugins.kotlin.jvm)
+	alias(libs.plugins.spring.boot.legacy)
+	alias(libs.plugins.spring.dependency.management)
+	alias(libs.plugins.spring.kotlin)
+	alias(libs.plugins.kotlinter)
 }
 
 group = "com.github.wpanas.spring"
@@ -13,22 +13,17 @@ repositories {
 }
 
 dependencies {
-	implementation(platform("org.testcontainers:testcontainers-bom:1.19.5"))
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation(platform(libs.testcontainers.bom))
+	implementation(libs.bundles.kotlin)
 
-	implementation("org.springframework.kafka:spring-kafka")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.springframework.boot:spring-boot-starter")
-	testImplementation("org.springframework.boot:spring-boot-starter-test") {
-		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-	}
+	implementation(libs.spring.kafka)
+	implementation(libs.spring.boot.starter)
+	implementation(libs.spring.boot.web)
+	testImplementation(libs.spring.boot.test)
 
-	testImplementation("org.awaitility:awaitility:4.2.0")
-	testImplementation("org.awaitility:awaitility-kotlin:4.2.0")
-	testImplementation("org.springframework.kafka:spring-kafka-test")
-	testImplementation("org.testcontainers:kafka")
+	testImplementation(libs.bundles.awaitility)
+	testImplementation(libs.spring.boot.kafka.test)
+	testImplementation(libs.testcontainers.kafka)
 }
 
 tasks.withType<Test> {
