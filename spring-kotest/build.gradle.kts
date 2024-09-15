@@ -1,40 +1,32 @@
 plugins {
-    kotlin("jvm")
-    id("org.springframework.boot") version "2.7.18"
-    id("io.spring.dependency-management") version "1.1.4"
-    kotlin("plugin.spring") version "1.9.22"
-    kotlin("plugin.jpa") version "1.9.22"
-    id("org.jmailen.kotlinter") version "4.2.0"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.spring.boot.legacy)
+    alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.spring.jpa)
+    alias(libs.plugins.spring.kotlin)
+    alias(libs.plugins.kotlinter)
 }
 
 group = "com.github.wpanas.spring"
-version = "0.0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation(platform("org.testcontainers:testcontainers-bom:1.19.5"))
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    implementation(platform(libs.testcontainers.bom))
+    implementation(libs.bundles.kotlin)
 
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    runtimeOnly("org.postgresql:postgresql")
-    implementation("org.springframework.boot:spring-boot-starter")
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-    }
+    implementation(libs.spring.boot.starter)
+    implementation(libs.spring.boot.jpa)
+    implementation(libs.spring.boot.web)
+    testImplementation(libs.spring.boot.test)
 
-    testImplementation("org.testcontainers:postgresql")
+    runtimeOnly(libs.postgres)
+    testImplementation(libs.testcontainers.postgres)
 
-    testImplementation(platform("io.kotest:kotest-bom:5.8.0"))
-    testImplementation("io.kotest:kotest-runner-junit5")
-    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.3")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
+    testImplementation(platform(libs.kotest.bom))
+    testImplementation(libs.bundles.kotest)
 }
 
 tasks.withType<Test> {
