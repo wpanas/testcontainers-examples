@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.9.24"
-kotlinx-coroutines = "1.8.1"
+kotlinx-coroutines = "1.9.0"
 spring-legacy = "2.7.18"
 spring-current = "3.2.5"
 spring-dependency-management = "1.1.5"
