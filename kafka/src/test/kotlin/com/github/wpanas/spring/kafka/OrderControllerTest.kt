@@ -43,20 +43,19 @@ internal class OrderControllerTest {
     @Test
     internal fun `should be able to place order`() {
         val order =
-            mockMvc.post("/order") {
-                content =
-                    """{"coffee": "Espresso"}"""
-                contentType = MediaType.APPLICATION_JSON
-                accept = MediaType.APPLICATION_JSON
-            }
-                .andDo { print() }
+            mockMvc
+                .post("/order") {
+                    content =
+                        """{"coffee": "Espresso"}"""
+                    contentType = MediaType.APPLICATION_JSON
+                    accept = MediaType.APPLICATION_JSON
+                }.andDo { print() }
                 .andExpect {
                     status { isOk() }
                     jsonPath("$.coffee", `is`("Espresso"))
                     jsonPath("$.id", `is`(not(emptyString())))
                     jsonPath("$.isDone", `is`(false))
-                }
-                .toOrder()
+                }.toOrder()
 
         await untilCallTo { orderService.findOne(order.id) } has {
             isDone
@@ -67,11 +66,11 @@ internal class OrderControllerTest {
     internal fun `should check order details`() {
         val order = orderService.placeOrder(OrderDetails("Latte"))
 
-        mockMvc.get("/order/${order.id}") {
-            contentType = MediaType.APPLICATION_JSON
-            accept = MediaType.APPLICATION_JSON
-        }
-            .andDo { print() }
+        mockMvc
+            .get("/order/${order.id}") {
+                contentType = MediaType.APPLICATION_JSON
+                accept = MediaType.APPLICATION_JSON
+            }.andDo { print() }
             .andExpect {
                 status { isOk() }
                 jsonPath("$.coffee", `is`(order.coffee))
@@ -85,11 +84,11 @@ internal class OrderControllerTest {
         val firstOrder = orderService.placeOrder(OrderDetails("Latte")).toDto()
         val secondOrder = orderService.placeOrder(OrderDetails("Espresso")).toDto()
 
-        mockMvc.get("/order") {
-            contentType = MediaType.APPLICATION_JSON
-            accept = MediaType.APPLICATION_JSON
-        }
-            .andDo { print() }
+        mockMvc
+            .get("/order") {
+                contentType = MediaType.APPLICATION_JSON
+                accept = MediaType.APPLICATION_JSON
+            }.andDo { print() }
             .andExpect {
                 status { isOk() }
                 jsonPath("$[*].coffee", containsInAnyOrder(firstOrder.coffee, secondOrder.coffee))

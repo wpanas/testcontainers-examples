@@ -29,13 +29,13 @@ internal class CatControllerTest {
 
     @Test
     internal fun `should add new cat`() {
-        mockMvc.post("/cats") {
-            content =
-                """{"name": "Sherry"}"""
-            contentType = APPLICATION_JSON
-            accept = APPLICATION_JSON
-        }
-            .andDo { print() }
+        mockMvc
+            .post("/cats") {
+                content =
+                    """{"name": "Sherry"}"""
+                contentType = APPLICATION_JSON
+                accept = APPLICATION_JSON
+            }.andDo { print() }
             .andExpect {
                 status { isOk() }
                 jsonPath("$.name", `is`("Sherry"))
@@ -47,10 +47,10 @@ internal class CatControllerTest {
         val benny = catRepository.save(Cat(id = null, name = "Benny"))
         val linda = catRepository.save(Cat(id = null, name = "Linda"))
 
-        mockMvc.get("/cats") {
-            accept = APPLICATION_JSON
-        }
-            .andDo { print() }
+        mockMvc
+            .get("/cats") {
+                accept = APPLICATION_JSON
+            }.andDo { print() }
             .andExpect {
                 status { isOk() }
                 jsonPath("$.totalElements", `is`(2))

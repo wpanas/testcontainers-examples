@@ -21,8 +21,7 @@ class PostgreSQLInitializer : ApplicationContextInitializer<ConfigurableApplicat
             "spring.datasource.url" to postgreSQLContainer.jdbcUrl,
             "spring.datasource.username" to postgreSQLContainer.username,
             "spring.datasource.password" to postgreSQLContainer.password,
-        )
-            .let(TestPropertyValues::of)
+        ).let(TestPropertyValues::of)
             .applyTo(applicationContext)
     }
 }

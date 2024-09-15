@@ -10,8 +10,8 @@ const val TOPIC = "com.github.wpanas.orders"
 @Configuration
 class KafkaConfig {
     @Bean
-    fun topic(): NewTopic {
-        return TopicBuilder.name(TOPIC)
+    fun topic(): NewTopic =
+        TopicBuilder
+            .name(TOPIC)
             .build()
-    }
 }

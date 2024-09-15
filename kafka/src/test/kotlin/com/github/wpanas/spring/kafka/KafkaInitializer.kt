@@ -19,8 +19,7 @@ class KafkaInitializer : ApplicationContextInitializer<ConfigurableApplicationCo
 
         mapOf(
             "spring.kafka.bootstrapServers" to kafkaContainer.bootstrapServers,
-        )
-            .let(TestPropertyValues::of)
+        ).let(TestPropertyValues::of)
             .applyTo(applicationContext)
     }
 }

@@ -31,11 +31,16 @@ data class Cat(
     val name: String,
 )
 
-data class CreateCatDto(val name: String) {
+data class CreateCatDto(
+    val name: String,
+) {
     fun toCat() = Cat(id = null, name = name)
 }
 
-data class ShowCatDto(val id: Long, val name: String)
+data class ShowCatDto(
+    val id: Long,
+    val name: String,
+)
 
 fun Cat.toDto() = ShowCatDto(id!!, name)
 
@@ -44,10 +49,13 @@ interface CatRepository : PagingAndSortingRepository<Cat, Long>
 
 @RestController
 @RequestMapping("/cats")
-class CatController(private val catRepository: CatRepository) {
+class CatController(
+    private val catRepository: CatRepository,
+) {
     @GetMapping
     fun findAll(pageable: Pageable): Page<ShowCatDto> =
-        catRepository.findAll(pageable)
+        catRepository
+            .findAll(pageable)
             .map(Cat::toDto)
 
     @PostMapping
