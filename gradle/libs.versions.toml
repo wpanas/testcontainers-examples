@@ -1,8 +1,8 @@
 [versions]
 kotlin = "2.0.20"
 kotlinx-coroutines = "1.9.0"
-spring-legacy = "2.7.18"
-spring-current = "3.3.3"
+spring-legacy = "3.3.4"
+spring-current = "3.3.4"
 spring-dependency-management = "1.1.6"
 kotlinter = "4.4.1"
 testcontainers = "1.20.1"
